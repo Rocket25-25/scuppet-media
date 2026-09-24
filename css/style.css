@@ -372,7 +372,7 @@ a:not([class]):hover{color:var(--yellow);}
   position:absolute; inset:0; z-index:0;
   background-image:
     linear-gradient(90deg, #030914 0%, rgba(3,9,20,0.96) 30%, rgba(3,9,20,0.6) 58%, rgba(3,9,20,0.15) 100%),
-    url('../images/about-hero.jpg');
+    var(--hero-photo, url('../images/about-hero.jpg'));
   background-size:cover, cover;
   background-position:center, center right;
   background-repeat:no-repeat, no-repeat;
@@ -1021,13 +1021,19 @@ a:not([class]):hover{color:var(--yellow);}
   background:var(--navy-panel);
   border:1px solid var(--line-on-dark);
   border-top:3px solid var(--yellow);
-  padding:2.75rem;
+  padding:1.85rem;
   box-shadow:0 30px 70px -25px rgba(0,0,0,0.6);
+  max-width:480px;
+  margin-left:auto;
+}
+@media (max-width:991px){
+  .contact-form-card{margin-left:0;}
 }
 .contact-form-tag{
-  font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
-  color:var(--yellow);margin-bottom:1.75rem;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--yellow);margin-bottom:1.1rem;
 }
+.form-scuppet .row.g-4{--bs-gutter-y:1rem;--bs-gutter-x:1rem;}
 .contact-wrap{
   display:grid;
   grid-template-columns:0.85fr 1.15fr;
@@ -1050,7 +1056,7 @@ a:not([class]):hover{color:var(--yellow);}
 .contact-placeholders .cp-row .bi{color:var(--yellow);}
 
 .form-scuppet .form-label{
-  font-size:0.8rem;font-weight:600;color:var(--text-on-dark-muted);margin-bottom:.65rem;
+  font-size:0.7rem;font-weight:600;color:var(--text-on-dark-muted);margin-bottom:.4rem;
   text-transform:uppercase;letter-spacing:0.06em;
 }
 .form-scuppet .form-control,
@@ -1060,9 +1066,9 @@ a:not([class]):hover{color:var(--yellow);}
   border-bottom:1.5px solid var(--line-on-dark);
   border-radius:0;
   color:var(--white);
-  padding:.9rem .1rem;
+  padding:.5rem .1rem;
   font-family:var(--font-body);
-  font-size:1rem;
+  font-size:0.9rem;
   transition:border-color .3s var(--ease);
 }
 .form-scuppet .form-control:focus,
@@ -1073,14 +1079,14 @@ a:not([class]):hover{color:var(--yellow);}
   color:var(--white);
 }
 .form-scuppet .form-select option{background:var(--navy-deep);color:var(--white);}
-.form-scuppet textarea.form-control{resize:vertical;min-height:120px;}
+.form-scuppet textarea.form-control{resize:vertical;min-height:70px;}
 .form-scuppet .form-control::placeholder{color:var(--text-on-dark-faint);}
 [data-other-service-wrap]{display:none;}
 [data-other-service-wrap].is-visible{display:block;}
 .form-scuppet .form-control-dark{
   background:#000;
   border:1px solid var(--line-on-dark);
-  padding:.9rem 1rem;
+  padding:.55rem .75rem;
 }
 .form-scuppet .form-control-dark::placeholder{color:var(--text-on-dark-faint);}
 .form-scuppet .form-control-dark:focus{
@@ -1114,7 +1120,7 @@ a:not([class]):hover{color:var(--yellow);}
   .page-hero-contact{padding-top:7.5rem;}
 }
 @media (max-width:560px){
-  .contact-form-card{padding:1.85rem;}
+  .contact-form-card{padding:1.4rem;max-width:100%;}
 }
 
 /* =========================================================
