@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Scuppet Media — Website
 
 A premium, frontend-only website for **Scuppet Media**, built with HTML5, CSS3, vanilla JavaScript, Bootstrap 5, and Bootstrap Icons. No backend, no build step — open and go.
@@ -54,3 +55,6 @@ Typography: **Archivo** (800/900) for headlines and numerals, **IBM Plex Sans** 
 - Semantic landmarks, skip link, visible focus states, `aria-label`s on icon-only controls.
 - Respects `prefers-reduced-motion`.
 - Fully responsive from 320px up; no horizontal scroll at any breakpoint.
+=======
+# scuppet-media
+>>>>>>> 4e684be4037e8f12172b10de5b7664b626cc2d71
