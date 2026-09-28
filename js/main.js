@@ -243,16 +243,25 @@
       });
     });
 
-    // Fetch a CSRF token once per page load and drop it into the form.
-    fetch("csrf-token.php", { credentials: "same-origin" })
-      .then(function (r) { return r.json(); })
-      .then(function (data) {
-        var tokenInput = contactForm.querySelector('input[name="csrf_token"]');
-        if (tokenInput) tokenInput.value = data.csrf_token;
-      })
-      .catch(function () {
-        console.error("Could not load security token for the contact form.");
-      });
+    // Where is the site running?
+    //  - Localhost (XAMPP / php -S)  -> PHP backend: contact-handler.php (+ CSRF token)
+    //  - Vercel (or `vercel dev` on :3000) -> serverless function: /api/contact
+    var usePhpBackend =
+      /^(localhost|127\.0\.0\.1)$/.test(window.location.hostname) &&
+      window.location.port !== "3000";
+
+    if (usePhpBackend) {
+      // Fetch a CSRF token once per page load and drop it into the form.
+      fetch("csrf-token.php", { credentials: "same-origin" })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          var tokenInput = contactForm.querySelector('input[name="csrf_token"]');
+          if (tokenInput) tokenInput.value = data.csrf_token;
+        })
+        .catch(function () {
+          console.error("Could not load security token for the contact form.");
+        });
+    }
 
     var submitBtn = contactForm.querySelector("button[type=submit]");
 
@@ -296,11 +305,25 @@
         submitBtn.classList.add("is-loading");
       }
 
-      fetch("contact-handler.php", {
-        method: "POST",
-        credentials: "same-origin",
-        body: new FormData(contactForm)
-      })
+      var request;
+      if (usePhpBackend) {
+        request = fetch("contact-handler.php", {
+          method: "POST",
+          credentials: "same-origin",
+          body: new FormData(contactForm)
+        });
+      } else {
+        var payload = {};
+        new FormData(contactForm).forEach(function (value, key) { payload[key] = value; });
+        request = fetch("/api/contact", {
+          method: "POST",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      }
+
+      request
         .then(function (res) { return res.json(); })
         .then(function (result) {
           if (result.success) {
