@@ -1,0 +1,6 @@
+{
+    "name": "scuppet-media/contact-form",
+    "require": {
+        "phpmailer/phpmailer": "^7.1"
+    }
+}

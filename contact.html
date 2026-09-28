@@ -44,7 +44,12 @@
         <div class="reveal contact-form-card">
           <p class="contact-form-tag">Start A Conversation</p>
 
-          <form class="form-scuppet" data-contact-form novalidate>
+          <form class="form-scuppet ajax-enquiry-form" data-contact-form novalidate>
+            <input type="hidden" name="csrf_token" value="">
+            <div class="visually-hidden" aria-hidden="true" style="position:absolute; left:-9999px;">
+              <label for="cf-website">Leave this field blank</label>
+              <input type="text" id="cf-website" name="website_url" tabindex="-1" autocomplete="off">
+            </div>
             <div class="row g-4">
               <div class="col-md-6">
                 <label for="cf-name" class="form-label">Name</label>

@@ -1102,18 +1102,62 @@ a:not([class]):hover{color:var(--yellow);}
 .form-scuppet .is-invalid.invalid-feedback{display:block;}
 .form-scuppet .form-control.is-invalid,
 .form-scuppet .form-select.is-invalid{border-color:#FF7A7A;}
+/* Success popup: centered modal overlay with a green tick */
 .form-success{
   display:none;
-  border:1px solid var(--yellow);
-  background:rgba(255,212,0,0.06);
-  padding:2rem;
-  align-items:flex-start;gap:1rem;
-  margin-top:2rem;
+  position:fixed;inset:0;z-index:2000;
+  align-items:center;justify-content:center;
+  padding:1.5rem;
+  background:rgba(2,9,20,0.78);
+  backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  opacity:0;transition:opacity .25s ease;
 }
-.form-success.is-visible{display:flex;}
-.form-success .bi{color:var(--yellow);font-size:1.5rem;flex:none;}
-.form-success h4{margin-bottom:.4rem;font-weight:600;}
-.form-success p{color:var(--text-on-dark-muted);font-size:0.92rem;}
+.form-success.is-visible{display:flex;opacity:1;}
+.form-success-card{
+  position:relative;
+  width:100%;max-width:440px;
+  background:var(--navy-panel, #0B121D);
+  border:1px solid var(--yellow);
+  padding:2.5rem 2rem 2rem;
+  text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:1rem;
+  box-shadow:0 24px 60px rgba(0,0,0,.55);
+  animation:formSuccessPop .35s cubic-bezier(.2,.9,.3,1.2);
+}
+.form-success .bi-check-circle,
+.form-success .bi-check-circle-fill{color:#22C55E;font-size:3.75rem;line-height:1;flex:none;}
+.form-success h4{margin:0 0 .4rem;font-weight:700;}
+.form-success p{margin:0;color:var(--text-on-dark-muted);font-size:0.95rem;}
+.form-success-close{
+  position:absolute;top:.6rem;right:.6rem;
+  width:2.25rem;height:2.25rem;
+  background:none;border:0;color:var(--text-on-dark-muted);
+  font-size:1.5rem;line-height:1;cursor:pointer;
+}
+.form-success-close:hover{color:#fff;}
+/* Desktop: show the popup on the left side (over the hero artwork, between
+   the headline and the form) with no dark backdrop and without blocking the page */
+@media (min-width:992px){
+  .form-success{
+    inset:auto;
+    top:50%;left:46%;
+    width:auto;padding:0;
+    background:none;
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  .form-success-card{pointer-events:auto;width:360px;max-width:80vw;}
+}
+.form-success.is-leaving{opacity:0;}
+@keyframes formSuccessPop{
+  from{transform:scale(.9);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
+@media (prefers-reduced-motion:reduce){
+  .form-success{transition:none;}
+  .form-success-card{animation:none;}
+}
 @media (max-width:991px){
   .contact-wrap{grid-template-columns:1fr;gap:2.75rem;}
   .contact-hero-grid{grid-template-columns:1fr;gap:2.75rem;}
